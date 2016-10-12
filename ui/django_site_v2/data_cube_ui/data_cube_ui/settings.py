@@ -33,6 +33,8 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 
 import os
 
+from .pgpass_helper import read_pgpass
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -109,15 +111,20 @@ WSGI_APPLICATION = 'data_cube_ui.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'datacube',
-	'USER': 'dc_user',
-	'PASSWORD': 'dcuser1',
-	'HOST': '127.0.0.1'
-    }
+    'default': read_pgpass('ceosdatacube'),
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'ceosdatacube',
+#         'USER': 'dc_user',
+#         'PASSWORD': 'dcuser1',
+#         'HOST': '130.56.244.227'
+#     }
+# }
 
 
 # Password validation
@@ -160,8 +167,11 @@ STATIC_URL = '/static/'
 STATIC_ROOT = '/static/'
 
 STATICFILES_DIRS = [
-    '/home/localuser/Datacube/data_cube_ui/static',
+
+    os.path.join(BASE_DIR, "static"),
 ]
+
+print(STATICFILES_DIRS)
 
 # CELERY STUFF
 BROKER_URL = 'redis://localhost:6379'
@@ -170,3 +180,8 @@ CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = 'UTC'
+
+# Make Celery run all tasks in the current thread
+# from celery import current_app
+# current_app.conf.CELERY_ALWAYS_EAGER = True
+# current_app.conf.CELERY_EAGER_PROPAGATES_EXCEPTIONS = True

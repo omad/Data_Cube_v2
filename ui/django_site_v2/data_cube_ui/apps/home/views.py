@@ -80,14 +80,13 @@ def login(request):
                 return redirect(next)
             else:
                 # Return a 'disabled account' error message
-                ...
+                pass
         else:
             # Return an 'invalid login' error message.
             context = {
                 'message': "Please enter a correct username and password combination."
             }
             return render(request, 'login_page.html', context)
-            ...
     else:
         context = {}
         if request.GET:
