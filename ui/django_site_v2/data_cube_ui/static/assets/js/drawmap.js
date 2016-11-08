@@ -70,18 +70,18 @@ function DrawMap(container_id, min_lat, max_lat, min_lon, max_lon) {
         navigationHelpButton: true,
         navigationInstructionsInitiallyVisible: true,
         sceneMode: Cesium.SceneMode.SCENE2D,
-        /*imageryProvider : new Cesium.ArcGisMapServerImageryProvider({
+        imageryProvider : new Cesium.ArcGisMapServerImageryProvider({
             url : 'http://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer'
-        }),*/
+        })
         /*imageryProvider: new Cesium.SingleTileImageryProvider({
             url: "/static/assets/images/22.22222,-10,57.777777,10.png",
             rectangle: Cesium.Rectangle.fromDegrees(22.22222,-10,57.77777,10)
         }),*/
         //TODO:? add a black box rather than this image?
-        imageryProvider: new Cesium.SingleTileImageryProvider({
-            url: window._MAIN_IMAGERY_,
-            rectangle: Cesium.Rectangle.fromDegrees(-180,-101.25,180,101.25)
-        }),
+        // imageryProvider: new Cesium.SingleTileImageryProvider({
+        //     url: window._MAIN_IMAGERY_,
+        //     rectangle: Cesium.Rectangle.fromDegrees(-180,-101.25,180,101.25)
+        // }),
     });
 
     this.cesium.scene.imageryLayers.addImageryProvider(new Cesium.SingleTileImageryProvider({

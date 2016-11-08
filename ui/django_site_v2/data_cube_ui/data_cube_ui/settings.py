@@ -111,7 +111,7 @@ WSGI_APPLICATION = 'data_cube_ui.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
-
+# Read the username, password, hostname etc from ~/.pgpass for the named database
 DATABASES = {
     'default': read_pgpass('ceosdatacube'),
 }
